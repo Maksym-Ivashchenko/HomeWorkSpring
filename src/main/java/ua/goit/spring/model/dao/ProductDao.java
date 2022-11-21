@@ -21,6 +21,6 @@ public class ProductDao {
     private final Long price;
 
     @OneToOne
-    @JoinColumn(name = "fabricator_id", referencedColumnName = "id")
+    @JoinColumn(name = "fabricator_name", referencedColumnName = "name")
     private final FabricatorDao fabricatorDao;
 }
