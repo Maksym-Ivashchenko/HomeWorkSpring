@@ -1,26 +1,28 @@
 package ua.goit.spring.model.dao;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "products")
 public class ProductDao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final UUID id;
+    private UUID id;
 
     @Column(name = "name", length = 50)
-    private final String name;
+    private String name;
 
-    @Column(name = "name", length = 50)
-    private final Long price;
+    @Column(name = "price", length = 50)
+    private Long price;
 
-    @OneToOne
-    @JoinColumn(name = "fabricator_name", referencedColumnName = "name")
-    private final FabricatorDao fabricatorDao;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fabricator_name")
+    private FabricatorDao fabricatorDao;
 }
