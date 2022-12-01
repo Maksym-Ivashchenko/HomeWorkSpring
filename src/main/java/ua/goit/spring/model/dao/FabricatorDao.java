@@ -14,14 +14,12 @@ import java.util.UUID;
 public class FabricatorDao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name", length = 50)
     private String name;
 
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH
-    }, mappedBy = "fabricatorDao")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricatorDao")
     private Set<ProductDao> products;
 }

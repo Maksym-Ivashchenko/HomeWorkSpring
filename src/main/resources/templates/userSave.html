@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="fragments :: header"></div>
+<body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
+      bgproperties="fixed">
+<div th:replace="fragments :: navbar"></div>
+
+<div align="center">
+    <form action="/user/save" method="post">
+        <label style="color:#ffffff">Login:</label><br>
+        <input type="text" name="login"/><br/>
+        <label style="color:#ffffff">Password:</label><br>
+        <input type="text" name="password"/><br/>
+        <label style="color:#ffffff">First name:</label><br>
+        <input type="text" name="firstName"/><br/>
+        <label style="color:#ffffff">Last name:</label><br>
+        <input type="text" name="lastName"/><br/>
+        <button type="submit">Save</button>
+    </form>
+    <br>
+
+    <table th:if="${user!=null}">
+        <thead>
+        <tr>
+            <th>ID:</th>
+            <th>Login:</th>
+            <th>Password:</th>
+            <th>First name:</th>
+            <th>Last name:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${user.id}">
+                ID
+            </td>
+            <td th:text="${user.login}">
+                Login
+            </td>
+            <td th:password="${user.password}">
+                Password
+            </td>
+            <td th:text="${user.firstName}">
+                First name
+            </td>
+            <td th:text="${user.lastName}">
+                Last name
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${user==null}">
+        <a style="color:#ffffff" th:text="${message}">message</a>
+    </div>
+</div>
+</body>
+</html>

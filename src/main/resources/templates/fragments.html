@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="header">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="icon" href="26387fa4f5b1e3f7b6217b27d79bf264.png" type="image/png" sizes="16x16">
+        <link rel="icon" href="2d0b56e7e51cf11036ad8734bdb67e2d.png" type="image/png" sizes="32x32">
+        <link rel="apple-touch-icon" href="725b756a69a7d4c235070e51acd85560.png" sizes="180x180">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <style>
+    .navbar-header {
+      float: right;
+    }
+
+    table {
+           font-family: arial, sans-serif;
+           border-collapse: collapse;
+           background-color: whitesmoke;
+    }
+
+    td {
+        border: 2px solid grey;
+        text-align: left;
+        padding: 6px;
+    }
+
+    th {
+        border: 2px solid grey;
+        text-align: left;
+        padding: 6px;
+        background-color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+        </style>
+    </head>
+</div>
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-fw fa-user"></i> User<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/list">User's list</a></li>
+                        <li><a href="/user/search">Find user</a></li>
+                        <li><a href="/user/save">Add user</a></li>
+                        <li><a href="/user/delete">Delete user</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class='fas fa-industry'></i> Fabricator<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/fabricator/list">Fabricator's list</a></li>
+                        <li><a href="/fabricator/search">Find fabricator</a></li>
+                        <li><a href="/fabricator/save">Add fabricator</a></li>
+                        <li><a href="/fabricator/delete">Delete fabricator</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class='fas fa-archive'></i> Product<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/product/list">Product's list</a></li>
+                        <li><a href="/product/search">Find product</a></li>
+                        <li><a href="/product/save">Add product</a></li>
+                        <li><a href="/product/delete">Delete product</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class='fas fa-user-shield'></i> Role<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/role/list">Role's list</a></li>
+                        <li><a href="/role/search">Find role</a></li>
+                        <li><a href="/role/save">Add role</a></li>
+                        <li><a href="/role/delete">Delete role</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">WebApplication</a>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

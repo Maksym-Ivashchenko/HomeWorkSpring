@@ -19,9 +19,10 @@ ALTER TABLE users OWNER TO postgres;
 
 CREATE TABLE roles
 (
-	id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	name VARCHAR(50) NOT NULL,
-	FOREIGN KEY (id) REFERENCES users(id)
+	user_id UUID,
+	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 ALTER TABLE roles OWNER TO postgres;
@@ -39,8 +40,8 @@ CREATE TABLE products
 	id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
 	name VARCHAR(50) NOT NULL,
 	price BIGINT,
-	fabricator_name VARCHAR(50) NOT NULL,
-	FOREIGN KEY (fabricator_name) REFERENCES fabricators(name)
+	fabricator_id UUID,
+	FOREIGN KEY (fabricator_id) REFERENCES fabricators(id)
 );
 
 ALTER TABLE products OWNER TO postgres;

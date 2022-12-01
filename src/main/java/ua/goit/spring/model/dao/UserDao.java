@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Table(name = "users")
 public class UserDao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name", length = 50)
@@ -27,7 +28,6 @@ public class UserDao {
     @Column(name = "last_name", length = 200)
     private String lastName;
 
-//    @OneToOne(mappedBy = "userDao", cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
-//    private Set<RoleDao> roles;
+    @OneToMany(mappedBy = "userDao", cascade = CascadeType.ALL)
+    private Set<RoleDao> roles;
 }

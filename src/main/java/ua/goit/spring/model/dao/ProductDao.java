@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ProductDao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name", length = 50)
@@ -23,6 +23,6 @@ public class ProductDao {
     private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fabricator_name")
+    @JoinColumn(name = "fabricator_id")
     private FabricatorDao fabricatorDao;
 }
