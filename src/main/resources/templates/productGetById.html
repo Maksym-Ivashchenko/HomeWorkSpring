@@ -6,35 +6,36 @@
 <div th:replace="fragments :: navbar"></div>
 
 <div align="center">
-    <form action="/role/save" method="post">
-        <label style="color:#ffffff">Role id:</label><br>
-        <input type="text" name="roleId"/><br/>
-        <label style="color:#ffffff">Name:</label><br>
-        <input type="text" name="name"/><br/>
-        <button type="submit">Save</button>
+    <form action="/product/search" method="post">
+        <label style="color:#ffffff">Product id:</label><br>
+        <input type="text" name="productId"/><br/>
+        <button type="submit">Find</button>
     </form>
     <br>
 
-    <table th:if="${role!=null}">
+    <table th:if="${product!=null}">
         <thead>
         <tr>
             <th>ID:</th>
             <th>Name:</th>
+            <th>Price:</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td th:text="${role.id}">
+            <td th:text="${product.id}">
                 ID
             </td>
-            <td th:text="${role.name}">
+            <td th:text="${product.name}">
                 Name
+            </td>
+            <td th:text="${product.price}">
+                Price
             </td>
         </tr>
         </tbody>
-        <a style="color:#ffffff" th:text="${message}">message</a>
     </table>
-    <div th:if="${role==null}">
+    <div th:if="${product==null}">
         <a style="color:#ffffff" th:text="${message}">message</a>
     </div>
 </div>

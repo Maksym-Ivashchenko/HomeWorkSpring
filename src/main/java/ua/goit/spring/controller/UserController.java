@@ -46,7 +46,8 @@ public class UserController {
                     userDto.getLogin().isBlank() || userDto.getPassword().isBlank()) {
                 return result.addObject("message", "User not created");
             } else {
-                return result.addObject("user", userService.save(userDto));
+                result.addObject("user", userService.save(userDto));
+                return result.addObject("message", "User Successfully created");
             }
         } catch (IllegalArgumentException e) {
             return result.addObject("message", "User not created");

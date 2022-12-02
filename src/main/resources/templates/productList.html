@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="fragments :: header"></div>
+<body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
+      bgproperties="fixed">
+<div th:replace="fragments :: navbar"></div>
+
+<div align="center">
+    <table>
+        <thead>
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Price:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">
+                ID
+            </td>
+            <td th:text="${product.name}">
+                Name
+            </td>
+            <td th:text="${product.price}">
+                Price
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
