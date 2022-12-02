@@ -6,7 +6,16 @@
 <div th:replace="fragments :: navbar"></div>
 
 <div align="center">
-    <table>
+    <form action="/fabricator/save" method="post">
+        <label style="color:#ffffff">Fabricator id:</label><br>
+        <input type="text" name="fabricatorId"/><br/>
+        <label style="color:#ffffff">Name:</label><br>
+        <input type="text" name="name"/><br/>
+        <button type="submit">Save</button>
+    </form>
+    <br>
+
+    <table th:if="${fabricator!=null}">
         <thead>
         <tr>
             <th>ID:</th>
@@ -14,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="fabricator : ${fabricators}">
+        <tr>
             <td th:text="${fabricator.id}">
                 ID
             </td>
@@ -24,6 +33,9 @@
         </tr>
         </tbody>
     </table>
+    <div th:if="${fabricator==null}">
+        <a style="color:#ffffff" th:text="${message}">message</a>
+    </div>
 </div>
 </body>
 </html>

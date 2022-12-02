@@ -27,12 +27,16 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public synchronized ModelAndView save(@RequestParam(name = "login") String login,
+    public synchronized ModelAndView save(@RequestParam(name = "userId") String id,
+                                          @RequestParam(name = "login") String login,
                                           @RequestParam(name = "password") String password,
                                           @RequestParam(name = "firstName") String firstName,
                                           @RequestParam(name = "lastName") String lastName) {
         ModelAndView result = new ModelAndView("userSave");
         UserDto userDto = new UserDto();
+        if (!id.isEmpty()) {
+            userDto.setId(UUID.fromString(id));
+        }
         userDto.setLogin(login);
         userDto.setPassword(password);
         userDto.setFirstName(firstName);
@@ -58,7 +62,7 @@ public class UserController {
     public ModelAndView getById(@RequestParam(name = "userId") String id) {
         ModelAndView result = new ModelAndView("userGetById");
         try {
-            if (id == null || id.equals("")) {
+            if (id.isEmpty() || id.isBlank()) {
                 return result.addObject("message", "User not found");
             } else {
                 return result.addObject("user", userService.getById(UUID.fromString(id)));
@@ -76,11 +80,11 @@ public class UserController {
     public ModelAndView deleteById(@RequestParam("userId") String id) {
         ModelAndView result = new ModelAndView("userDelete");
         try {
-            if (id == null || id.equals("")) {
+            if (id.isEmpty() || id.isBlank()) {
                 return result.addObject("message", "User not found");
             } else {
                 userService.deleteById(UUID.fromString(id));
-                return result.addObject("message", "User delete success");
+                return result.addObject("message", "User successfully deleted");
             }
         } catch (IllegalArgumentException | IncorrectResultSizeDataAccessException e) {
             return result.addObject("message", "User not found");

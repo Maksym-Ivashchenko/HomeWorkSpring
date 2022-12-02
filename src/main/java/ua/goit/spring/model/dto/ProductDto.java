@@ -6,8 +6,8 @@ import java.util.UUID;
 
 @Data
 public class ProductDto {
-    private final UUID id;
-    private final String name;
-    private final Long price;
-    private final FabricatorDto fabricatorDao;
+    private UUID id;
+    private String name;
+    private Long price;
+    private FabricatorDto fabricatorDao;
 }
