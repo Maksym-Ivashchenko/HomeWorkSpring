@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="fragments :: header"></div>
+<body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
+      bgproperties="fixed">
+<div th:replace="fragments :: navbar"></div>
+
+<div align="center">
+    <form action="/role/delete" method="post">
+        <label style="color:#ffffff">Role id:</label><br>
+        <input type="text" name="roleId"/><br/>
+        <button type="submit">Delete</button>
+    </form>
+    <br>
+
+    <div>
+        <a style="color:#ffffff" th:text="${message}">message</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="fragments :: header"></div>
+<body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
+      bgproperties="fixed">
+<div th:replace="fragments :: navbar"></div>
+
+<div align="center">
+    <form action="/role/save" method="post">
+        <label style="color:#ffffff">Role id:</label><br>
+        <input type="text" name="roleId"/><br/>
+        <label style="color:#ffffff">Name:</label><br>
+        <input type="text" name="name"/><br/>
+        <button type="submit">Save</button>
+    </form>
+    <br>
+
+    <table th:if="${role!=null}">
+        <thead>
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${role.id}">
+                ID
+            </td>
+            <td th:text="${role.name}">
+                Name
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${role==null}">
+        <a style="color:#ffffff" th:text="${message}">message</a>
+    </div>
+</div>
+</body>
+</html>

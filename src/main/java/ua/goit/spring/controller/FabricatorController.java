@@ -31,11 +31,11 @@ public class FabricatorController {
                                           @RequestParam(name = "name") String name) {
         ModelAndView result = new ModelAndView("fabricatorSave");
         FabricatorDto fabricatorDto = new FabricatorDto();
-        if (!id.isEmpty()) {
-            fabricatorDto.setId(UUID.fromString(id));
-        }
-        fabricatorDto.setName(name);
         try {
+            if (!id.isEmpty()) {
+                fabricatorDto.setId(UUID.fromString(id));
+            }
+            fabricatorDto.setName(name);
             if (fabricatorDto.getName().isBlank()) {
                 return result.addObject("message", "Fabricator not created");
             } else {

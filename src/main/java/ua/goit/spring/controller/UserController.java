@@ -34,14 +34,14 @@ public class UserController {
                                           @RequestParam(name = "lastName") String lastName) {
         ModelAndView result = new ModelAndView("userSave");
         UserDto userDto = new UserDto();
-        if (!id.isEmpty()) {
-            userDto.setId(UUID.fromString(id));
-        }
-        userDto.setLogin(login);
-        userDto.setPassword(password);
-        userDto.setFirstName(firstName);
-        userDto.setLastName(lastName);
         try {
+            if (!id.isEmpty()) {
+                userDto.setId(UUID.fromString(id));
+            }
+            userDto.setLogin(login);
+            userDto.setPassword(password);
+            userDto.setFirstName(firstName);
+            userDto.setLastName(lastName);
             if (userDto.getFirstName().isBlank() || userDto.getLastName().isBlank() ||
                     userDto.getLogin().isBlank() || userDto.getPassword().isBlank()) {
                 return result.addObject("message", "User not created");
