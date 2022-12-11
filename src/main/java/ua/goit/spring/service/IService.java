@@ -1,4 +1,4 @@
-package ua.goit.spring.model.service;
+package ua.goit.spring.service;
 
 import java.util.List;
 

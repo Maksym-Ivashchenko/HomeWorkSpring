@@ -1,11 +1,11 @@
-package ua.goit.spring.model.service;
+package ua.goit.spring.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.goit.spring.model.dao.RoleDao;
 import ua.goit.spring.model.dto.RoleDto;
-import ua.goit.spring.model.repository.RoleRepository;
-import ua.goit.spring.model.service.converter.RoleConverter;
+import ua.goit.spring.repository.RoleRepository;
+import ua.goit.spring.service.converter.RoleConverter;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -40,5 +40,9 @@ public class RoleService implements IService<RoleDto, UUID> {
     @Override
     public void deleteById(UUID id) {
         roleRepository.deleteById(id);
+    }
+
+    public RoleDto getUserRole() {
+        return roleConverter.from(roleRepository.getUserRole());
     }
 }

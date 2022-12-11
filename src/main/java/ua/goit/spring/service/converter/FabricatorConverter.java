@@ -1,4 +1,4 @@
-package ua.goit.spring.model.service.converter;
+package ua.goit.spring.service.converter;
 
 import org.springframework.stereotype.Service;
 import ua.goit.spring.model.dao.FabricatorDao;

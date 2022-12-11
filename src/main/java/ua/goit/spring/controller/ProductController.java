@@ -8,16 +8,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.spring.model.dto.FabricatorDto;
 import ua.goit.spring.model.dto.ProductDto;
-import ua.goit.spring.model.service.ProductService;
+import ua.goit.spring.service.FabricatorService;
+import ua.goit.spring.service.ProductService;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RequestMapping("/product")
 @Controller
 public class ProductController {
     private final ProductService productService;
+    private final FabricatorService fabricatorService;
 
     @GetMapping("/list")
     public ModelAndView list() {
@@ -27,15 +32,20 @@ public class ProductController {
 
     @GetMapping("/save")
     public ModelAndView saveForm() {
-        return new ModelAndView("productSave");
+        List<String> listFabricatorsName = getFabricatorsName();
+        ModelAndView result = new ModelAndView("productSave");
+        return result.addObject("fabricators", listFabricatorsName);
     }
 
     @PostMapping("/save")
     public synchronized ModelAndView save(@RequestParam(name = "productId") String id,
                                           @RequestParam(name = "name") String name,
-                                          @RequestParam(name = "price") String price) {
+                                          @RequestParam(name = "price") String price,
+                                          @RequestParam(name = "fabricatorName") String fabricatorName) {
+
         ModelAndView result = new ModelAndView("productSave");
         ProductDto productDto = new ProductDto();
+
         try {
             if (!id.isEmpty()) {
                 productDto.setId(UUID.fromString(id));
@@ -46,10 +56,14 @@ public class ProductController {
             } catch (NumberFormatException e) {
                 return result.addObject("message", "Product not created");
             }
-            if (productDto.getName().isBlank() || productDto.getPrice() == null) {
+            productDto.setFabricatorDto(fabricatorService.findByName(fabricatorName));
+            List<String> listFabricatorsName = getFabricatorsName();
+            if (productDto.getName().isBlank() || productDto.getPrice() == null
+                    || productDto.getFabricatorDto().getName().isEmpty()) {
                 return result.addObject("message", "Product not created");
             } else {
                 result.addObject("product", productService.save(productDto));
+                result.addObject("fabricators", listFabricatorsName);
                 return result.addObject("message", "Product successfully created");
             }
         } catch (IllegalArgumentException e) {
@@ -95,4 +109,11 @@ public class ProductController {
         }
     }
 
+    private List<String> getFabricatorsName() {
+        List<String> listFabricatorsName = fabricatorService.findAll()
+                .stream()
+                .map(FabricatorDto::getName)
+                .collect(Collectors.toList());
+        return listFabricatorsName;
+    }
 }

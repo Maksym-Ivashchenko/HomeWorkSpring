@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.spring.model.dto.RoleDto;
 import ua.goit.spring.model.dto.UserDto;
-import ua.goit.spring.model.service.UserService;
+import ua.goit.spring.service.RoleService;
+import ua.goit.spring.service.UserService;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -14,6 +18,7 @@ import java.util.UUID;
 @RestController
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @GetMapping("/list")
     public ModelAndView list() {
@@ -32,8 +37,11 @@ public class UserController {
                                           @RequestParam(name = "password") String password,
                                           @RequestParam(name = "firstName") String firstName,
                                           @RequestParam(name = "lastName") String lastName) {
+
         ModelAndView result = new ModelAndView("userSave");
         UserDto userDto = new UserDto();
+        Set<RoleDto> roles = new HashSet<>();
+
         try {
             if (!id.isEmpty()) {
                 userDto.setId(UUID.fromString(id));
@@ -42,6 +50,8 @@ public class UserController {
             userDto.setPassword(password);
             userDto.setFirstName(firstName);
             userDto.setLastName(lastName);
+            roles.add(roleService.getUserRole());
+            userDto.setRoles(roles);
             if (userDto.getFirstName().isBlank() || userDto.getLastName().isBlank() ||
                     userDto.getLogin().isBlank() || userDto.getPassword().isBlank()) {
                 return result.addObject("message", "User not created");
@@ -77,6 +87,7 @@ public class UserController {
     public ModelAndView deleteByIdForm() {
         return new ModelAndView("userDelete");
     }
+
     @PostMapping("/delete")
     public ModelAndView deleteById(@RequestParam("userId") String id) {
         ModelAndView result = new ModelAndView("userDelete");

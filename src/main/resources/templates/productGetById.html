@@ -19,6 +19,7 @@
             <th>ID:</th>
             <th>Name:</th>
             <th>Price:</th>
+            <th>Brand:</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,9 @@
             </td>
             <td th:text="${product.price}">
                 Price
+            </td>
+            <td th:text="${product.fabricatorDto.getName}">
+                Brand
             </td>
         </tr>
         </tbody>

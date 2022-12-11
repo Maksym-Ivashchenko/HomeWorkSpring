@@ -13,9 +13,18 @@
         <input type="text" name="name"/><br/>
         <label style="color:#ffffff">Price:</label><br>
         <input type="text" name="price"/><br/>
+        <label style="color:#ffffff">Fabricator:</label><br/>
+        <p><select name="fabricatorName">
+            <option
+                    th:each="fabricator : ${fabricators}"
+                    th:value="${fabricator}"
+                    th:text="${fabricator}"
+            >List
+            </option>
+        </select></p><br/>
         <button type="submit">Save</button>
     </form>
-    <br>
+    <br/>
 
     <table th:if="${product!=null}">
         <thead>
@@ -23,6 +32,7 @@
             <th>ID:</th>
             <th>Name:</th>
             <th>Price:</th>
+            <th>Brand:</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +45,9 @@
             </td>
             <td th:text="${product.price}">
                 Price
+            </td>
+            <td th:text="${product.fabricatorDto.getName}">
+                Brand
             </td>
         </tr>
         </tbody>

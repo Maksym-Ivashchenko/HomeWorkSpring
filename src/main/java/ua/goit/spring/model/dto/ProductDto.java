@@ -9,5 +9,5 @@ public class ProductDto {
     private UUID id;
     private String name;
     private Long price;
-    private FabricatorDto fabricatorDao;
+    private FabricatorDto fabricatorDto;
 }

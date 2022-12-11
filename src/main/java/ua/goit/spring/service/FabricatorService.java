@@ -1,11 +1,11 @@
-package ua.goit.spring.model.service;
+package ua.goit.spring.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.goit.spring.model.dao.FabricatorDao;
 import ua.goit.spring.model.dto.FabricatorDto;
-import ua.goit.spring.model.repository.FabricatorRepository;
-import ua.goit.spring.model.service.converter.FabricatorConverter;
+import ua.goit.spring.repository.FabricatorRepository;
+import ua.goit.spring.service.converter.FabricatorConverter;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -41,5 +41,10 @@ public class FabricatorService implements IService<FabricatorDto, UUID> {
     @Override
     public void deleteById(UUID id) {
         fabricatorRepository.deleteById(id);
+    }
+
+    public FabricatorDto findByName(String name) {
+        FabricatorDao byName = fabricatorRepository.findByName(name);
+        return fabricatorConverter.from(byName);
     }
 }

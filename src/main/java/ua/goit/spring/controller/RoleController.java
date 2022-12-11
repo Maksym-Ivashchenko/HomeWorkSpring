@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.spring.model.dto.RoleDto;
-import ua.goit.spring.model.service.RoleService;
+import ua.goit.spring.service.RoleService;
 
 import java.util.UUID;
 

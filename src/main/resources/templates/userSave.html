@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <div th:replace="fragments :: header"></div>
 <body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
       bgproperties="fixed">
@@ -17,6 +18,15 @@
         <input type="text" name="firstName"/><br/>
         <label style="color:#ffffff">Last name:</label><br>
         <input type="text" name="lastName"/><br/>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Roles: </label>
+            <div class="col-8">
+                <th:block th:each="role: ${listRoles}">
+                    <input type="checkbox" th:field="*{roles}"
+                           th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                </th:block>
+            </div>
+        </div>
         <button type="submit">Save</button>
     </form>
     <br>

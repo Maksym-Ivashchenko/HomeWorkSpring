@@ -1,4 +1,4 @@
-package ua.goit.spring.model.service.converter;
+package ua.goit.spring.service.converter;
 
 public interface Converter<E, T>{
     E from(T entity);

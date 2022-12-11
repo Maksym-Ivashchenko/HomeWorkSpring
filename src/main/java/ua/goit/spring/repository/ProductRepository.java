@@ -1,4 +1,4 @@
-package ua.goit.spring.model.repository;
+package ua.goit.spring.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

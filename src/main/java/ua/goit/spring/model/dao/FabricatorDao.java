@@ -17,7 +17,7 @@ public class FabricatorDao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "fabricator_name", length = 50)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricatorDao")

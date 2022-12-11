@@ -5,7 +5,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.spring.model.dto.FabricatorDto;
-import ua.goit.spring.model.service.FabricatorService;
+import ua.goit.spring.service.FabricatorService;
 
 import java.util.UUID;
 

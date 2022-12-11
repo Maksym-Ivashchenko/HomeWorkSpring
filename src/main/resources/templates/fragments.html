@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <div th:fragment="header">
     <head>
         <title> WebApp </title>
@@ -41,57 +42,67 @@
     }
 
 
+
+
+
         </style>
     </head>
 </div>
 <body>
 <div th:fragment="navbar">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/"><i class="fa fa-fw fa-home"></i> Home</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-fw fa-user"></i> User<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/user/list">User's list</a></li>
-                        <li><a href="/user/search">Find user</a></li>
-                        <li><a href="/user/save">Add user</a></li>
-                        <li><a href="/user/delete">Delete user</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class='fas fa-industry'></i> Fabricator<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/fabricator/list">Fabricator's list</a></li>
-                        <li><a href="/fabricator/search">Find fabricator</a></li>
-                        <li><a href="/fabricator/save">Add fabricator</a></li>
-                        <li><a href="/fabricator/delete">Delete fabricator</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class='fas fa-archive'></i> Product<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/product/list">Product's list</a></li>
-                        <li><a href="/product/search">Find product</a></li>
-                        <li><a href="/product/save">Add product</a></li>
-                        <li><a href="/product/delete">Delete product</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class='fas fa-user-shield'></i> Role<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/role/list">Role's list</a></li>
-                        <li><a href="/role/search">Find role</a></li>
-                        <li><a href="/role/save">Add role</a></li>
-                        <li><a href="/role/delete">Delete role</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">WebApplication</a>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-fw fa-user"></i> User<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/list">User's list</a></li>
+                            <li><a href="/user/search">Find user</a></li>
+                            <li><a href="/user/save">Add user</a></li>
+                            <li><a href="/user/delete">Delete user</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class='fas fa-industry'></i> Fabricator<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/fabricator/list">Fabricator's list</a></li>
+                            <li><a href="/fabricator/search">Find fabricator</a></li>
+                            <div sec:authorize="hasAnyAuthority('admin')">
+                            <li><a href="/fabricator/save">Add fabricator</a></li>
+                            <li><a href="/fabricator/delete">Delete fabricator</a></li>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class='fas fa-archive'></i> Product<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/product/list">Product's list</a></li>
+                            <li><a href="/product/search">Find product</a></li>
+                            <div sec:authorize="hasAnyAuthority('admin')">
+                            <li><a href="/product/save">Add product</a></li>
+                            <li><a href="/product/delete">Delete product</a></li>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class='fas fa-user-shield'></i> Role<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/role/list">Role's list</a></li>
+                            <li><a href="/role/search">Find role</a></li>
+                            <div sec:authorize="hasAnyAuthority('admin')">
+                            <li><a href="/role/save">Add role</a></li>
+                            <li><a href="/role/delete">Delete role</a></li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">WebApplication</a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 </div>
+
 </body>
 </html>

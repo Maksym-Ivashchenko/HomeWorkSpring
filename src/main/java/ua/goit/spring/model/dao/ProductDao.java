@@ -16,7 +16,7 @@ public class ProductDao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "product_name", length = 50)
     private String name;
 
     @Column(name = "price", length = 50)

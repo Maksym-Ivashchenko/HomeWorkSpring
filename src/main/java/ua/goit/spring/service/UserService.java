@@ -1,11 +1,11 @@
-package ua.goit.spring.model.service;
+package ua.goit.spring.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.goit.spring.model.dao.UserDao;
 import ua.goit.spring.model.dto.UserDto;
-import ua.goit.spring.model.repository.UserRepository;
-import ua.goit.spring.model.service.converter.UserConverter;
+import ua.goit.spring.repository.UserRepository;
+import ua.goit.spring.service.converter.UserConverter;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
