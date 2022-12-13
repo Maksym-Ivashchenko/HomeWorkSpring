@@ -8,7 +8,7 @@ import ua.goit.spring.repository.UserRepository;
 import ua.goit.spring.service.converter.UserConverter;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -19,11 +19,11 @@ public class UserService implements IService<UserDto, UUID> {
     private final UserConverter userConverter;
 
     @Override
-    public List<UserDto> findAll() {
+    public Set<UserDto> findAll() {
         return userRepository.findAll()
                 .stream()
                 .map(userConverter::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

@@ -8,7 +8,7 @@ import ua.goit.spring.repository.ProductRepository;
 import ua.goit.spring.service.converter.ProductConverter;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,11 +18,11 @@ public class ProductService implements IService<ProductDto, UUID> {
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
     @Override
-    public List<ProductDto> findAll() {
+    public Set<ProductDto> findAll() {
         return productRepository.findAll()
                 .stream()
                 .map(productConverter::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

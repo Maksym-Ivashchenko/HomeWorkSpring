@@ -1,9 +1,9 @@
 package ua.goit.spring.service;
 
-import java.util.List;
+import java.util.Set;
 
 public interface IService<E,I> {
-    List<E> findAll();
+    Set<E> findAll();
     E save(E entity);
     E getById(I id);
     void deleteById(I id);

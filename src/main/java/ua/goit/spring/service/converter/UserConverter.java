@@ -1,6 +1,7 @@
 package ua.goit.spring.service.converter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.goit.spring.model.dao.UserDao;
 import ua.goit.spring.model.dto.UserDto;
@@ -27,10 +28,11 @@ public class UserConverter implements Converter<UserDto, UserDao> {
 
     @Override
     public UserDao to(UserDto entity) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UserDao userDao = new UserDao();
         userDao.setId(entity.getId());
         userDao.setLogin(entity.getLogin());
-        userDao.setPassword(entity.getPassword());
+        userDao.setPassword(encoder.encode(entity.getPassword()));
         userDao.setFirstName(entity.getFirstName());
         userDao.setLastName(entity.getLastName());
         userDao.setRoles(entity.getRoles().stream()

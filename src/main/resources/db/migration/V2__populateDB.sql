@@ -1,12 +1,12 @@
 INSERT INTO users(user_name, password, first_name, last_name)
-VALUES('yoda', 'yodapassword', 'Ivan', 'Ivanov');
+VALUES('yoda', '$2a$10$PLaC/RjXYFKWwk0gckMKa.iM2URT15qCe/Ho01K1F/lVq26dAki7a', 'Ivan', 'Ivanov');
 INSERT INTO users(user_name, password, first_name, last_name)
-VALUES('obivan', 'obivanpassword', 'Obi', 'Van');
+VALUES('obivan', '$2a$10$YIro7gy91DP9loZbo.75yOspubnuw0aH5ZE/bGsH.Z5uHIWnnIRPa', 'Obi', 'Van');
 INSERT INTO users(user_name, password, first_name, last_name)
-VALUES('veider', 'veiderpassword', 'Dart', 'Veider');
+VALUES('veider', '$2a$10$/MmquLQXZeT3rjiKnODwDuuXlUFFe7GpBD398b4ohX/LlmfiaAz/K', 'Dart', 'Veider');
 
-INSERT INTO roles(role_name) VALUES('user');
-INSERT INTO roles(role_name) VALUES('admin');
+INSERT INTO roles(role_name) VALUES('USER');
+INSERT INTO roles(role_name) VALUES('ADMIN');
 
 INSERT INTO fabricators(fabricator_name) VALUES('Lenivec');
 INSERT INTO fabricators(fabricator_name) VALUES('Sonic');
@@ -16,15 +16,15 @@ INSERT INTO fabricators(fabricator_name) VALUES('Sladik');
 INSERT INTO users_roles VALUES
 (
 (SELECT id FROM users WHERE user_name = 'obivan'),
-(SELECT id FROM roles WHERE role_name = 'user')
+(SELECT id FROM roles WHERE role_name = 'USER')
 ),
 (
 (SELECT id FROM users WHERE user_name = 'veider'),
-(SELECT id FROM roles WHERE role_name = 'user')
+(SELECT id FROM roles WHERE role_name = 'USER')
 ),
 (
 (SELECT id FROM users WHERE user_name = 'yoda'),
-(SELECT id FROM roles WHERE role_name = 'admin')
+(SELECT id FROM roles WHERE role_name = 'ADMIN')
 );
 
 INSERT INTO products(product_name, price, fabricator_id)

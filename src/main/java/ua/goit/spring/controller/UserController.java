@@ -28,20 +28,33 @@ public class UserController {
 
     @GetMapping("/save")
     public ModelAndView saveForm() {
-        return new ModelAndView("userSave");
+        ModelAndView result = new ModelAndView("userSave");
+        return result.addObject("listRoles", roleService.findAll());
     }
 
-    @PostMapping("/save")
-    public synchronized ModelAndView save(@RequestParam(name = "userId") String id,
-                                          @RequestParam(name = "login") String login,
-                                          @RequestParam(name = "password") String password,
-                                          @RequestParam(name = "firstName") String firstName,
-                                          @RequestParam(name = "lastName") String lastName) {
 
+    @PostMapping("/save")
+    public synchronized ModelAndView save(
+            @RequestParam(name = "id") String id,
+            @RequestParam(name = "login") String login,
+            @RequestParam(name = "password") String password,
+            @RequestParam(name = "firstName") String firstName,
+            @RequestParam(name = "lastName") String lastName,
+            @RequestParam(name = "roleId") String userRolesId
+    ) {
         ModelAndView result = new ModelAndView("userSave");
+        Set<RoleDto> rolesFromDB = roleService.findAll();
+        result.addObject("listRoles", rolesFromDB);
+        UUID roleId = UUID.fromString(userRolesId);
         UserDto userDto = new UserDto();
         Set<RoleDto> roles = new HashSet<>();
-
+        String message = "User not created";
+        if (rolesFromDB.contains(roleService.getById(roleId))) {
+            RoleDto roleDto = roleService.getById(UUID.fromString(userRolesId));
+            roles.add(roleDto);
+        } else {
+            return result.addObject("message", message);
+        }
         try {
             if (!id.isEmpty()) {
                 userDto.setId(UUID.fromString(id));
@@ -50,17 +63,16 @@ public class UserController {
             userDto.setPassword(password);
             userDto.setFirstName(firstName);
             userDto.setLastName(lastName);
-            roles.add(roleService.getUserRole());
             userDto.setRoles(roles);
             if (userDto.getFirstName().isBlank() || userDto.getLastName().isBlank() ||
                     userDto.getLogin().isBlank() || userDto.getPassword().isBlank()) {
-                return result.addObject("message", "User not created");
+                return result.addObject("message", message);
             } else {
                 result.addObject("user", userService.save(userDto));
                 return result.addObject("message", "User Successfully created");
             }
-        } catch (IllegalArgumentException e) {
-            return result.addObject("message", "User not created");
+        } catch (Exception e) {
+            return result.addObject("message", message);
         }
     }
 

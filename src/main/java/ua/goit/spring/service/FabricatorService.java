@@ -8,7 +8,7 @@ import ua.goit.spring.repository.FabricatorRepository;
 import ua.goit.spring.service.converter.FabricatorConverter;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -19,11 +19,11 @@ public class FabricatorService implements IService<FabricatorDto, UUID> {
     private final FabricatorConverter fabricatorConverter;
 
     @Override
-    public List<FabricatorDto> findAll() {
+    public Set<FabricatorDto> findAll() {
         return fabricatorRepository.findAll()
                 .stream()
                 .map(fabricatorConverter::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

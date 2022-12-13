@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
     <head>
         <title> WebApp </title>
@@ -59,8 +60,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="/user/list">User's list</a></li>
                             <li><a href="/user/search">Find user</a></li>
-                            <li><a href="/user/save">Add user</a></li>
-                            <li><a href="/user/delete">Delete user</a></li>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/user/save">Add user</a></li>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/user/delete">Delete user</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -68,10 +69,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="/fabricator/list">Fabricator's list</a></li>
                             <li><a href="/fabricator/search">Find fabricator</a></li>
-                            <div sec:authorize="hasAnyAuthority('admin')">
-                            <li><a href="/fabricator/save">Add fabricator</a></li>
-                            <li><a href="/fabricator/delete">Delete fabricator</a></li>
-                            </div>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/fabricator/save">Add fabricator</a></li>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/fabricator/delete">Delete fabricator</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -79,21 +78,18 @@
                         <ul class="dropdown-menu">
                             <li><a href="/product/list">Product's list</a></li>
                             <li><a href="/product/search">Find product</a></li>
-                            <div sec:authorize="hasAnyAuthority('admin')">
-                            <li><a href="/product/save">Add product</a></li>
-                            <li><a href="/product/delete">Delete product</a></li>
-                            </div>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/product/save">Add product</a></li>
+                            <li sec:authorize="hasRole('ADMIN')"><a href="/product/delete">Delete product</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <li class="dropdown" sec:authorize="hasRole('ADMIN')">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class='fas fa-user-shield'></i> Role<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/role/list">Role's list</a></li>
                             <li><a href="/role/search">Find role</a></li>
-                            <div sec:authorize="hasAnyAuthority('admin')">
                             <li><a href="/role/save">Add role</a></li>
                             <li><a href="/role/delete">Delete role</a></li>
-                            </div>
                         </ul>
                     </li>
                 </ul>

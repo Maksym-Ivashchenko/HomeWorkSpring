@@ -34,6 +34,8 @@ public class WebSecurityConfig {
                 .logout()
                 .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID")
+                .and()
+                .csrf().disable()
         ;
 
         return http.build();

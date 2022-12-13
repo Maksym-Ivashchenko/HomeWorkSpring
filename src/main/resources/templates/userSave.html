@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:replace="fragments :: header"></div>
 <body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
       bgproperties="fixed">
@@ -9,7 +10,7 @@
 <div align="center">
     <form action="/user/save" method="post">
         <label style="color:#ffffff">User id:</label><br>
-        <input type="text" name="userId"/><br/>
+        <input type="text" name="id"/><br/>
         <label style="color:#ffffff">Login:</label><br>
         <input type="text" name="login"/><br/>
         <label style="color:#ffffff">Password:</label><br>
@@ -18,15 +19,13 @@
         <input type="text" name="firstName"/><br/>
         <label style="color:#ffffff">Last name:</label><br>
         <input type="text" name="lastName"/><br/>
-        <div class="form-group row">
-            <label class="col-4 col-form-label">Roles: </label>
-            <div class="col-8">
-                <th:block th:each="role: ${listRoles}">
-                    <input type="checkbox" th:field="*{roles}"
-                           th:text="${role.name}" th:value="${role.id}" class="m-2" />
-                </th:block>
-            </div>
-        </div>
+        <ul>
+            <li th:each="role : ${listRoles}">
+                <input type="checkbox" name="roleId" th:value="${role.id}"/>
+                <label style="color:#ffffff" th:text="${role.name}">Roles</label>
+            </li>
+        </ul>
+        <br/>
         <button type="submit">Save</button>
     </form>
     <br>
@@ -39,6 +38,7 @@
             <th>Password:</th>
             <th>First name:</th>
             <th>Last name:</th>
+            <th>Role:</th>
         </tr>
         </thead>
         <tbody>
@@ -57,6 +57,9 @@
             </td>
             <td th:text="${user.lastName}">
                 Last name
+            </td>
+            <td th:each="userRole : ${user.roles}" th:text="${userRole.getName}">
+                Role
             </td>
         </tr>
         </tbody>

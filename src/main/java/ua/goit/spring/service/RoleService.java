@@ -8,7 +8,7 @@ import ua.goit.spring.repository.RoleRepository;
 import ua.goit.spring.service.converter.RoleConverter;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,11 +18,11 @@ public class RoleService implements IService<RoleDto, UUID> {
     private final RoleRepository roleRepository;
     private final RoleConverter roleConverter;
     @Override
-    public List<RoleDto> findAll() {
+    public Set<RoleDto> findAll() {
         return roleRepository.findAll()
                 .stream()
                 .map(roleConverter::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -40,9 +40,5 @@ public class RoleService implements IService<RoleDto, UUID> {
     @Override
     public void deleteById(UUID id) {
         roleRepository.deleteById(id);
-    }
-
-    public RoleDto getUserRole() {
-        return roleConverter.from(roleRepository.getUserRole());
     }
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:replace="fragments :: header"></div>
 <body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
       bgproperties="fixed">
@@ -11,10 +12,11 @@
         <thead>
         <tr>
             <th>ID:</th>
-            <th>Login:</th>
-            <th>Password:</th>
+            <th sec:authorize="hasRole('ADMIN')">Login:</th>
+            <th sec:authorize="hasRole('ADMIN')">Password:</th>
             <th>First name:</th>
             <th>Last name:</th>
+            <th sec:authorize="hasRole('ADMIN')">Role:</th>
         </tr>
         </thead>
         <tbody>
@@ -22,10 +24,10 @@
             <td th:text="${user.id}">
                 ID
             </td>
-            <td th:text="${user.login}">
+            <td th:text="${user.login}" sec:authorize="hasRole('ADMIN')">
                 Login
             </td>
-            <td th:text="${user.password}">
+            <td th:text="${user.password}" sec:authorize="hasRole('ADMIN')">
                 Password
             </td>
             <td th:text="${user.firstName}">
@@ -33,6 +35,9 @@
             </td>
             <td th:text="${user.lastName}">
                 Last name
+            </td>
+            <td th:each="userRole : ${user.roles}" th:text="${userRole.getName}" sec:authorize="hasRole('ADMIN')">
+                Role
             </td>
         </tr>
         </tbody>
