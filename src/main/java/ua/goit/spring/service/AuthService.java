@@ -12,10 +12,6 @@ import java.util.stream.Collectors;
 public class AuthService {
 
     public ModelAndView getSecurityResponse() {
-        Set<String> userRoles = getUserRoles();
-            if (userRoles.contains("ADMIN")) {
-                return new ModelAndView("/indexAdmin");
-            }
         return new ModelAndView("/index");
     }
 

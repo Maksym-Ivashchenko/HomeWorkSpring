@@ -6,6 +6,7 @@
 <body bgcolor="#c0c0c0" background="https://uassd.my.canva.site/images/b1b216dc0ee683b37b967ae6a4d84852.jpg"
       bgproperties="fixed">
 <div th:replace="fragments :: navbar"></div>
-<p2>HELLO USER</p2>
+<p2 sec:authorize="hasRole('USER')">HELLO USER</p2>
+<p2 sec:authorize="hasRole('ADMIN')">HELLO ADMIN</p2>
 </body>
 </html>

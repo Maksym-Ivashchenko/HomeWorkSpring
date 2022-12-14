@@ -12,7 +12,7 @@ import ua.goit.spring.service.SecurityResponse;
 public class SecurityController {
     private final AuthService authService;
 
-    @GetMapping
+    @GetMapping("/index")
     public ModelAndView get() {
         return authService.getSecurityResponse();
     }
